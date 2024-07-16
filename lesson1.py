@@ -105,14 +105,14 @@
 # else:
 #     print("Неверный оператор")
 
-class Book:
-    def __init__(self, title, author):
-        self.title = title
-        self.author = author
+# class Book:
+#     def __init__(self, title, author):
+#         self.title = title
+#         self.author = author
         
-    def info(self):
-        print(f"Книга:{self.title}\nАвтор:{self.author} ")
+#     def info(self):
+#         print(f"Книга:{self.title}\nАвтор:{self.author} ")
         
-book = Book("Звезды","Тологон кызы")
-Book.info()
+# book = Book("Звезды","Тологон кызы")
+# book.info()
             
