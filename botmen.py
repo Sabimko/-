@@ -11,17 +11,17 @@ start_buttons = [
     types.KeyboardButton('О Нас'),
     types.KeyboardButton('Товары'),
     types.KeyboardButton('Заказать'),
-    types.KeyboardButton('Контакты'),
+    types.KeyboardButton('Контакты')
 ]
 
 start_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True).add(*start_buttons)
 
 @dp.message_handler(commands='start')
-async def start(message:types.Message):
+async def start(message: types.Message):
     await message.answer(f'Здравствуйте, {message.from_user.full_name}!', reply_markup=start_keyboard)
 
 @dp.message_handler(text='О нас')
-async def about_us(message:types.Message):
+async def about_us(message: types.Message):
     await message.reply("Магазин бытовой техники «TechnoShop».Наша миссия – сегодня обеспечить всех соотечественников самыми доступными и качественными продуктами. Все наше внимание сосредоточено на введении срочных платежей как халяльной нации, основанной на подходе легкой покупки оборудования.")
 
 
@@ -35,11 +35,11 @@ products = [
     types.KeyboardButton("Назад")    
 ]
 
-courses_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True).add(*products)
+products_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True).add(*products)
 
 @dp.message_handler(text='Товары')
-async def about_us(message:types.Message):
-    await message.answer("Вот наши товары: ", reply_markup=courses_keyboard)
+async def show_products(message: types.Message):
+    await message.answer("Вот наши товары: ", reply_markup=products_keyboard)
 
 
 @dp.message_handler(text='Смартфоны')
@@ -90,7 +90,7 @@ async def show_smartphones(message: types.Message):
 
 
 @dp.message_handler(text='Кондиционеры')
-async def photo(message:types.Message):
+async def show_air_conditioners(message: types.Message):
     await message.answer_photo("https://technoshop.uz/wp-content/uploads/2024/06/artel-1-1.jpg",
         caption=(
             "Кондиционер Artel ARTSID2CW12BE Iceberg Invertor, белый"
@@ -124,7 +124,7 @@ async def photo(message:types.Message):
             ))
 
 @dp.message_handler(text='Ноутбуки')
-async def photo(message:types.Message):
+async def show_laptops(message:types.Message):
     await message.answer_photo("https://technoshop.uz/wp-content/uploads/2024/04/viktus-1.png",
         caption=(
             " Ноутбук: HP VICTUS 15-fa1093dx (15,6 ” FHD IPS 144 GHz | i5-13420h | DDR4 8 GB | SSD 512 GB | RTX 3050 6 GB)"
@@ -173,7 +173,7 @@ async def photo(message:types.Message):
             ))
     
 @dp.message_handler(text='Телевизоры')
-async def photo(message:types.Message):
+async def show_tvs(message:types.Message):
     await message.answer_photo("https://technoshop.uz/wp-content/uploads/2023/10/58430b44-2615-4894-bfd9-8389186206cc_test.webp",
         caption=(
             "Телевизор Artel 43/9100 TCL"
@@ -225,7 +225,7 @@ async def photo(message:types.Message):
     
  
 @dp.message_handler(text='Аксесуары со скидкой')
-async def photo(message:types.Message):
+async def show_disas(message:types.Message):
     await message.answer_photo("https://technoshop.uz/wp-content/uploads/2023/01/xiaomi-mi-11.jpg",
     caption=(
             " Телефон:Xiaomi MI 11"
@@ -252,13 +252,15 @@ async def photo(message:types.Message):
             "Информация: Контроллеры:Обнови свой Nintendo\n"
             "Скидка 10%"
             ))
-    
-@dp.message_handler(text="Назад")
-async def back_start(message:types.Message):
-    await start(message)
+
+
+
+@dp.message_handler(text='Назад')
+async def go_back(message: types.Message):
+    await message.answer("Вы вернулись в главное меню.", reply_markup=start_keyboard)
 
 @dp.message_handler(text="Заказать")
-async def application(message:types.Message):
+async def order(message:types.Message):
     button = types.KeyboardButton("Запишите ", request_contact=True)
     button = types.KeyboardButton("Отправить контакт", request_contact=True)
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
@@ -273,7 +275,7 @@ async def get_contact(message:types.Message):
    
 @dp.message_handler(text='Контакты')
 async def contact(message:types.Message):
-    await message.reply_contact(first_name='technoshop', phone_number=+998712000660)
+    await message.reply_contact(first_name='technoshop', phone_number=+998712000660 )
     
-
 executor.start_polling(dp, skip_updates=True)
+    
