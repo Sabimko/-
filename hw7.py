@@ -4,7 +4,7 @@ import time
 import argparse
 import logging
 
-# Настройка логирования
+
 logging.basicConfig(filename='http_requests.log', level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -17,10 +17,10 @@ def perform_request(url):
         logging.error(f"Request to {url} failed: {e}")
 
 def main(url, initial_delay, interval):
-    # Задаем начальную задержку
+    
     time.sleep(initial_delay)
     
-    # Планируем периодические запросы
+    
     schedule.every(interval).seconds.do(perform_request, url=url)
 
     while True:
